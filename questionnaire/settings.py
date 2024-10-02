@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'questionnaire.urls'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 TEMPLATES = [
     {
