@@ -37,12 +37,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     fullname = models.CharField(max_length=255)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
-    date_joined = models.DateTimeField(default=timezone.now)
+    date_joined = models.DateTimeField(auto_now_add=True)
 
     objects = CustomUserManager()
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['hemis_token', 'fullname']
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.username

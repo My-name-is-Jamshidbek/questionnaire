@@ -1,15 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>login</title>
-</head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-        <input type="text" name="username">
-        <input type="password" name="password">
-        <button type="submit">Kirish</button>
-    </form>
-</body>
-</html>
+<form method="POST">
+    {% csrf_token %}
+    
+    <!-- Display form-level non-field errors if any -->
+    {% if messages %}
+        <ul class="error-messages">
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="{{ request.POST.username }}" required>
+        <!-- Display error message for username -->
+        {% if form.username.errors %}
+            <div class="error">{{ form.username.errors }}</div>
+        {% endif %}
+    </div>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <!-- Display error message for password -->
+        {% if form.password.errors %}
+            <div class="error">{{ form.password.errors }}</div>
+        {% endif %}
+    </div>
+    
+    <button type="submit">Login</button>
+</form>
